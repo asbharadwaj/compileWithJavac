@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            category="org.eclipse.ui.externaltools"
+            delegate="compilewithjavac.launching.JavacLaunchDelegate"
+            id="launch.javac"
+            modes="run"
+            name="compile with javac">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sample Category"
+            id="compileWithJavac.commands.category">
+      </category>
+      <command
+            name="Sample Command"
+            categoryId="compileWithJavac.commands.category"
+            id="compileWithJavac.commands.sampleCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="compileWithJavac.commands.sampleCommand"
+            class="compilewithjavac.handlers.SampleHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="compileWithJavac.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Sample Menu"
+               mnemonic="M"
+               id="compileWithJavac.menus.sampleMenu">
+            <command
+                  commandId="compileWithJavac.commands.sampleCommand"
+                  mnemonic="S"
+                  id="compileWithJavac.menus.sampleCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="compileWithJavac.toolbars.sampleToolbar">
+            <command
+                  commandId="compileWithJavac.commands.sampleCommand"
+                  icon="icons/sample.png"
+                  tooltip="Say hello world"
+                  id="compileWithJavac.toolbars.sampleCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="compilewithjavac.launching.LaunchJavacTabGroup"
+            helpContextId="org.eclipse.jdt.debug.ui.local_java_application_type_context"
+            id="launch.javac.launchConfigurationTabGroup.launchjavac"
+            type="launch.javac">
+         <launchMode
+               description="%localJavaApplicationTabGroupDescription.debug"
+               mode="debug"
+               perspective="org.eclipse.debug.ui.DebugPerspective">
+         </launchMode>
+         <launchMode
+               description="%localJavaApplicationTabGroupDescription.run"
+               mode="run">
+         </launchMode>
+      </launchConfigurationTabGroup>
+   </extension>
+
+</plugin>
